@@ -1,16 +1,34 @@
-import React, { useState, useEffect } from 'react';
-function App() {
-  const [message, setMessage] = useState('');
-  useEffect(() => {
-    fetch('http://localhost:5000/')
-      .then(response => response.text())
-      .then(data => setMessage(data));
-  }, []);
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css';
+import Academics from "./pages/Academics";
+import Aboutus from "./pages/AboutUs";
+import News from "./pages/News-events";
+import Login from "./pages/Login";
+import Layout  from "./pages/layout";
+import Homepage from "./pages/Homepage";
 
+
+
+function App() {
   return (
     <div className="App">
-      <h1>{message}</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<Homepage/>} />
+            <Route path="Homepage" element={<Homepage/>} />
+            <Route path="Academics" element={<Academics/>} />
+            <Route path="News-events" element={<News/>} />
+            <Route path="AboutUs" element={<Aboutus/>} />
+            <Route path="Login" element={<Login/>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      
     </div>
+    
   );
 }
+
 export default App;
